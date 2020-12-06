@@ -14,11 +14,11 @@ namespace Minsk
              2  3
 
     */
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            bool showTree = false;
+            var showTree = false;
             while (true)
             {
                 Console.Write("> ");
@@ -40,19 +40,15 @@ namespace Minsk
                     continue;
                 }
 
-
-
-                // var parser = new Parser(line);
-                // var syntaxTree = parser.Parse();
-
                 var syntaxTree = SyntaxTree.Parse(line);
 
                 if (showTree)
                 {
-                    var color = Console.ForegroundColor;
+                    // var color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     PrettyPrint(syntaxTree.Root);
-                    Console.ForegroundColor = color;
+                    // Console.ForegroundColor = color;
+                    Console.ResetColor();
                 }
 
                 if (!syntaxTree.Diagnostics.Any())
@@ -63,31 +59,13 @@ namespace Minsk
                 }
                 else
                 {
-                    var color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     foreach (var diag in syntaxTree.Diagnostics)
                     {
                         Console.WriteLine(diag);
                     }
-                    Console.ForegroundColor = color;
+                    Console.ResetColor();
                 }
-
-                // var lexer = new Lexer(line);
-
-                // while (true)
-                // {
-                //     var token = lexer.NextToken();
-                //     if (token.Kind == SyntaxKind.EndOfFileToken)
-                //     {
-                //         break;
-                //     }
-                //     Console.Write($"{token.Kind}: '{token.Text}' ");
-                //     if (token.Value != null)
-                //     {
-                //         Console.Write($"{token.Value}");
-                //     }
-                //     Console.WriteLine();
-                // }
             }
         }
 
@@ -97,7 +75,7 @@ namespace Minsk
             // └──
             // ├──
             //  │
-            var marker = isLast ? "└─" : "├─";
+            var marker = isLast ? "└──" : "├──";
 
             Console.Write(indent);
             Console.Write(marker);
@@ -110,7 +88,7 @@ namespace Minsk
             }
             Console.WriteLine();
 
-            indent += isLast ?  "    " : "│   ";
+            indent += isLast ?  "   " : "│  ";
             var lastChild = node.GetChildren().LastOrDefault();
             foreach (var child in node.GetChildren())
             {
