@@ -72,7 +72,7 @@ namespace Minsk.CodeAnalysis
 
             while (true)
             {
-                var precedence = GetBinaryOperatorPrecedence(Current.Kind);
+                var precedence = Current.Kind.GetBinaryOperatorPrecedence();
 
                 if (precedence == 0 || precedence <= parentPrecedence)
                     break;
@@ -85,20 +85,7 @@ namespace Minsk.CodeAnalysis
 
         }
 
-        private static int GetBinaryOperatorPrecedence(SyntaxKind kind)
-        {
-            switch (kind)
-            {
-                case SyntaxKind.PlusToken:
-                case SyntaxKind.MinusToken:
-                    return 1;
-                case SyntaxKind.StarToken:
-                case SyntaxKind.SlashToken:
-                    return 2;
-                default:
-                    return 0; // is not a binary operator
-            }
-        }
+
 
         private ExpressionSyntax ParsePrimaryExpression()
         {
