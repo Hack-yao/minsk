@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Minsk.CodeAnalysis
+namespace Minsk.CodeAnalysis.Syntax
 {
     /* Lexer produces Tokens just like leaves in tree.
         Parser produces the actual sentences which are trees, which obey syntax rules.

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Minsk.CodeAnalysis
+namespace Minsk.CodeAnalysis.Syntax
 {
     internal sealed class Parser
     {
@@ -95,8 +95,6 @@ namespace Minsk.CodeAnalysis
             return left;
 
         }
-
-
 
         private ExpressionSyntax ParsePrimaryExpression()
         {
