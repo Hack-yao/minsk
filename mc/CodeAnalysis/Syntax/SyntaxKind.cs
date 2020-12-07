@@ -3,7 +3,7 @@ namespace Minsk.CodeAnalysis.Syntax
     public enum SyntaxKind
     {
         // Tokens
-        BadToken,
+        BadToken,   // SyntaxKind kind, if kind is not initialized, by default, it is BadToken
         EndOfFileToken,
         WhiteSpaceToken,
         NumberToken,
@@ -13,6 +13,11 @@ namespace Minsk.CodeAnalysis.Syntax
         SlashToken,
         OpenParenthesisToken,
         CloseParenthesisToken,
+        IdentifierToken,
+
+        // Keywords true false
+        TrueKeyword,
+        FalseKeyword,
 
         // Expressions
         LiteralExpression,

@@ -55,10 +55,24 @@ namespace Minsk.CodeAnalysis.Syntax
                 var text = _text.Substring(start, length);
                 if (!int.TryParse(text, out var value))
                 {
-                    // _diagnostics.Add($"The number {_text} isn't valid Int32");
                     _diagnostics.Add($"The number {text} isn't valid Int32");
                 }
                 return new SyntaxToken(SyntaxKind.NumberToken, start, text, value);
+            }
+
+            // true false or identifier
+            if (char.IsLetter(Current))
+            {
+                var start = _position;
+
+                while (char.IsLetter(Current))
+                {
+                    Next();
+                }
+                var length = _position - start;
+                var text = _text.Substring(start, length);
+                var kind = SyntaxFacts.GetKeywordKind(text);
+                return new SyntaxToken(kind, start, text, null);
             }
 
             if (char.IsWhiteSpace(Current))
@@ -71,7 +85,6 @@ namespace Minsk.CodeAnalysis.Syntax
                 }
                 var length = _position - start;
                 var text = _text.Substring(start, length);
-                // int.TryParse(text, out var value);
                 return new SyntaxToken(SyntaxKind.WhiteSpaceToken, start, text, null);
             }
 

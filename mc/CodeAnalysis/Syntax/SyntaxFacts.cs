@@ -1,3 +1,5 @@
+using System;
+
 namespace Minsk.CodeAnalysis.Syntax
 {
     internal static class SyntaxFacts
@@ -25,6 +27,19 @@ namespace Minsk.CodeAnalysis.Syntax
                     return 3;
                 default:
                     return 0; // is not a unary operator
+            }
+        }
+
+        internal static SyntaxKind GetKeywordKind(string text)
+        {
+            switch (text)
+            {
+                case "true":
+                    return SyntaxKind.TrueKeyword;
+                case "false":
+                    return SyntaxKind.FalseKeyword;
+                default:
+                    return SyntaxKind.IdentifierToken;
             }
         }
     }
