@@ -121,8 +121,6 @@ namespace Minsk.CodeAnalysis.Syntax
                     return new LiteralExpressionSyntax(numberToken);
                 }
             }
-
-
         }
     }
 
