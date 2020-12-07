@@ -16,9 +16,12 @@ namespace Minsk.CodeAnalysis.Binding
         public BoundBinaryOperator Op { get; }
         public BoundExpression Right { get; }
 
-        public override Type Type => Left.Type;
+        // public override Type Type => Left.Type;    // 1 == 1 && 2 == 2      1==1   返回type 1?? error
+        public override Type Type => Op.Type;
+
 
         public override BoundNodeKind Kind => BoundNodeKind.BoundBinaryExpression;
+
     }
 
 
